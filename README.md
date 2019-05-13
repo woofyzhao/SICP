@@ -1,1 +1,2 @@
 # SICP
+- exercises and thoughts 
