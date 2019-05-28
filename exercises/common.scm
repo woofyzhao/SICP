@@ -6,3 +6,5 @@
 
 (define (half a)
     (/ a 2))
+
+(define (sum-of-square x y) (+ (square x) (square y)))
