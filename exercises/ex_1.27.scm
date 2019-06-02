@@ -1,0 +1,15 @@
+(load "common.scm")
+
+(define (carmichael? n)
+    (define (carmichael-next? a)
+        (cond ((= a n) true)
+              ((not (= (expmod a n n) a)) false)
+              (else (carmichael-next? (+ a 1)))))
+    (carmichael-next? 1))
+
+(carmichael? 561)
+(carmichael? 1105)
+(carmichael? 1729)
+(carmichael? 2465)
+(carmichael? 2821)
+(carmichael? 6601)
