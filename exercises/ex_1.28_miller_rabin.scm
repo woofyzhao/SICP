@@ -10,14 +10,14 @@
         0
         (remainder (square root) m)))
         
-(define (expmod-mr base exp m)
+(define (mr-expmod base exp m)
     (cond ((= exp 0) 1)
-          ((even? exp) (mr-determin (expmod-mr base (/ exp 2) m) m))
-          (else (remainder (* base (expmod-mr base (- exp 1) m)) m))))
+          ((even? exp) (mr-determin (mr-expmod base (/ exp 2) m) m))
+          (else (remainder (* base (mr-expmod base (- exp 1) m)) m))))
 
 (define (miller-rabin-test n)
     (define (try-it a)
-        (= (expmod-mr a (- n 1) n) 1))
+        (= (mr-expmod a (- n 1) n) 1))
     (try-it (+ 1 (random (- n 1)))))
 
 (define (mr-fast-prime? n times)
