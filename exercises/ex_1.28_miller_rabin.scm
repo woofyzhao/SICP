@@ -1,18 +1,18 @@
 (load "prime.scm")
 
-
 (define (nontrival-sqrt? a n)
     (cond ((= a 1) false)
           ((= a (- n 1)) false)
           (else (= (remainder (square a) n) 1))))
 
+(define (mr-determin root m)
+    (if (nontrival-sqrt? root m)
+        0
+        (remainder (square root) m)))
+        
 (define (expmod-mr base exp m)
     (cond ((= exp 0) 1)
-          ((even? exp) 
-             (let ((exproot (expmod-mr base (/ exp 2) m)))
-                (if (nontrival-sqrt? exproot m)
-                    0
-                    (remainder (square exproot) m))))
+          ((even? exp) (mr-determin (expmod-mr base (/ exp 2) m) m))
           (else (remainder (* base (expmod-mr base (- exp 1) m)) m))))
 
 (define (miller-rabin-test n)
