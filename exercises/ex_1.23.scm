@@ -15,6 +15,7 @@
 (timed-prime-test 10000000019); 70ms
 (timed-prime-test 98764321261); 220ms
 ; about 2/3 time
+; 1.5 speedup other than 2, due to the extra if test in next 
 
 (timed-prime-test 900000000013); 660ms
 ; about 1/2 time
