@@ -10,7 +10,7 @@
           (else (find-divisor n (+ test-divisor 1)))))
 
 (define (prime? n)
-    (= (smallest-divisor n) n))
+    (and (= (smallest-divisor n) n) (!= n 1)))
 
 ;(prime? 101)
 ;(prime? 19)

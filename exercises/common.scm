@@ -26,3 +26,15 @@
            (remainder (square (expmod base (/ exp 2) m)) m))
           (else 
            (remainder (* base (expmod base (- exp 1) m)) m))))
+
+(define (cube x)
+    (* x x x))
+
+(define (gcd a b)
+    (if (= b 0) 
+        a
+        (gcd b (remainder a b))))
+
+(define (identity x) x)
+
+(define (inc x) (+ x 1))
