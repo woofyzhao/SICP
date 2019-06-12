@@ -4,6 +4,15 @@
 (define (divides? a b)
     (= (remainder b a) 0))
 
+(define (positive? n)
+    (> n 0))
+
+(define (negative? n)
+    (< n 0))
+
+(define (average a b)
+    (/ (+ a b) 2))
+
 (define (double a)
     (+ a a))
 
@@ -38,3 +47,11 @@
 (define (identity x) x)
 
 (define (inc x) (+ x 1))
+
+(define (dec x) (- x 1))
+
+(define tolerance 0.00001)
+(define (close-enough? a b)
+    (< (abs (- a b)) tolerance))
+
+(define pi (acos -1.0))
