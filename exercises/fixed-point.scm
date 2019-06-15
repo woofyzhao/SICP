@@ -1,6 +1,6 @@
 (load "common.scm")
 
-(define tolerance 0.00001)
+(define tolerance 0.00000001)
 
 (define (fixed-point f first-guess)
     (define (try guess)

@@ -7,10 +7,8 @@
         (cond ((or (= k 0) (= k n)) (simpson-term k))
               ((even? k) (* 2 (simpson-term k)))
               (else (* 4 (simpson-term k)))))
-    (define (next k) 
-        (+ k 1))
     (* (/ (/ (- b a) n) 3) 
-       (sum sum-term 0 next n)))
+       (sum sum-term 0 inc n)))
 
 (integral cube 0 1.0 0.01)
 (integral cube 0 1.0 0.001)

@@ -50,8 +50,19 @@
 
 (define (dec x) (- x 1))
 
-(define tolerance 0.00001)
+(define tolerance 0.0000001)
 (define (close-enough? a b)
     (< (abs (- a b)) tolerance))
 
 (define pi (acos -1.0))
+
+(define (average-damp f)
+    (lambda (x) (average x (f x))))
+
+(define (compose f g)
+    (lambda (x) (f (g x))))
+
+(define (repeated f n)
+    (if (<= n 1)
+        f
+        (compose f (repeated f (- n 1)))))
