@@ -18,7 +18,7 @@
 (define (fixed-point f guess)
     ((iterative-improve 
         (lambda (guess) (close-enough? guess (f guess)))
-        (lambda (guess) (f guess))) guess))
+        f) guess))
 
 (define (sqrt2 a)
     (fixed-point (average-damp (lambda (x) (/ a x))) 1.0))

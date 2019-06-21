@@ -24,22 +24,22 @@
 (define (product term a next b)
     (accumulate * 1 term a next b))
 
-(sum_0 (lambda (x) (square x)) 
+(sum_0 square
        1
-       (lambda (x) (+ x 1))
+       inc
        5)
 
-(sum (lambda (x) (square x)) 
+(sum square
      1
-     (lambda (x) (+ x 1))
+     inc
      5)
 
-(product_0 (lambda (x) x) 
+(product_0 identity 
        1
-       (lambda (x) (+ x 1))
+       inc
        10)
 
-(product (lambda (x) x) 
+(product identity 
      1
-     (lambda (x) (+ x 1))
+     inc
      10)
