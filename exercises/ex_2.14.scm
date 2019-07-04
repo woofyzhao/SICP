@@ -16,6 +16,7 @@
 (print-interval (par1 A B))
 (print-interval (par2 A B))
 
+; this should be 1, however the identity of variables are lost during evaluation
 (print-interval (div-interval A A))
 (print-interval (div-interval A B))
 
