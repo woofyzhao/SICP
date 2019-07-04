@@ -1,4 +1,4 @@
-(load "ch2_inteval.scm")
+(load "ch2_interval.scm")
 
 (define (par1 r1 r2)
     (div-interval (mul-interval r1 r2)
@@ -10,5 +10,5 @@
                       (add-interval (div-interval one r1)
                                     (div-interval one r2)))))
 
-(print-interval (par1 3 5))
-(print-interval (par2 3 5))
+(print-interval (par1 (make-interval 3 5) (make-interval 4 6)))
+(print-interval (par2 (make-interval 3 5) (make-interval 4 6)))
