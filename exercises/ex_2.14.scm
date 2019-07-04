@@ -19,7 +19,17 @@
 (print-interval (div-interval A A))
 (print-interval (div-interval A B))
 
+(define B A) ; well...
+(print-interval (div-interval A B))
+
 (define C (make-center-percent 4 0.25))
 (define D (make-center-percent 5 0.2))
 (print-interval (div-interval C C))
 (print-interval (div-interval C D))
+
+; ex_2.15
+; yes she is right
+
+; ex_2.16
+; don't think it's possible
+; for example expression r1-r1*r2+r2 cannot be refactored to contain none repeated free variables
