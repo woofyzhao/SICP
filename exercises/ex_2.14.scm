@@ -10,5 +10,11 @@
                       (add-interval (div-interval one r1)
                                     (div-interval one r2)))))
 
-(print-interval (par1 (make-interval 3 5) (make-interval 4 6)))
-(print-interval (par2 (make-interval 3 5) (make-interval 4 6)))
+(define A (make-interval 3 5))
+(define B (make-interval 4 6))
+
+(print-interval (par1 A B))
+(print-interval (par2 A B))
+
+(print-interval (div-interval A A))
+(print-interval (div-interval A B))
