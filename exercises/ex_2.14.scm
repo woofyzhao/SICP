@@ -18,3 +18,8 @@
 
 (print-interval (div-interval A A))
 (print-interval (div-interval A B))
+
+(define C (make-center-percent 3 (/ 1 3)))
+(define D (make-center-percent 5 0.2))
+(print-interval (div-interval C C))
+(print-interval (div-interval C D))
