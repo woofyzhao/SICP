@@ -5,5 +5,5 @@
             (cons (cdr next) r)))
     (iter nil s))
 
-(reverse (1 4 9 16 25))
+(reverse (list 1 4 9 16 25))
 
