@@ -1,5 +1,5 @@
 (define (last-pair s)
-    (if (= (cdr s) nil)
+    (if (nil? (cdr s))
         s
         (last-pair (cdr s))))
 
