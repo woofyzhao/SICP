@@ -1,3 +1,5 @@
+(load "common.scm")
+
 (define (reverse s)
     (define (iter r next)
         (if (null? next)
