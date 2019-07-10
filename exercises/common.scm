@@ -106,3 +106,8 @@
        (* (numer y) (denom x))))
 
 (define nil '())
+
+(define (map f items)
+    (if (null? items)
+        nil
+        (cons (f (car items)) (map f (cdr items)))))
