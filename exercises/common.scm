@@ -104,3 +104,10 @@
 (define (equal-rat? x y)
     (= (* (numer x) (denom y))
        (* (numer y) (denom x))))
+
+(define nil '())
+
+(define (map f items)
+    (if (null? items)
+        nil
+        (cons (f (car items)) (map f (cdr items)))))

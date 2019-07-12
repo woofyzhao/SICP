@@ -41,11 +41,11 @@
     (/ (+ (lower-bound i) (upper-bound i)) 2))
 
 (define (width i)
-    (/ (- (upper-bound i) (lower-bound i)) 2))
+    (/ (- (upper-bound i) (lower-bound i)) 2))    
 
+; ex_2.12
 (define (make-center-percent c p)
-    (make-interval (- c (* c p)) (+ c (* c p))))
+    (make-center-width c (* c p)))
 
 (define (percent i)
-    (abs (/ width p)))
-
+    (abs (/ (width i) (center i))))    
