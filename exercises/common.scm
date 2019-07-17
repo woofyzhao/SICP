@@ -111,3 +111,10 @@
     (if (null? items)
         nil
         (cons (f (car items)) (map f (cdr items)))))
+
+(define (reverse s)
+    (define (iter r next)
+        (if (null? next)
+            r
+            (iter (cons (car next) r) (cdr next))))
+    (iter nil s))
