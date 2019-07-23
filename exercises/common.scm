@@ -107,10 +107,11 @@
 
 (define nil '())
 
-(define (map f items)
-    (if (null? items)
-        nil
-        (cons (f (car items)) (map f (cdr items)))))
+; use the more general default version
+;(define (map f items)
+;    (if (null? items)
+;        nil
+;        (cons (f (car items)) (map f (cdr items)))))
 
 (define (reverse s)
     (define (iter r next)
@@ -118,3 +119,34 @@
             r
             (iter (cons (car next) r) (cdr next))))
     (iter nil s))
+
+; list interfaces
+(define (filter predicate seq)
+    (cond ((null? seq) nil)
+          ((predicate (car seq)) (cons (car seq) (filter predicate (cdr seq))))
+          (else (filter predicate (cdr seq)))))
+
+(define (accumulate op intial seq)
+    (if (null? seq)
+        intial
+        (op (car seq) (accumulate op intial (cdr seq)))))
+
+(define (enumerate-interval low high)
+    (if (> low high)
+        nil
+        (cons low (enumerate-interval (+ low 1) high))))
+
+(define (enumerate-tree tree)
+    (cond ((null? tree) nil)
+          ((not (pair? tree)) (list tree))
+          (else (append (enumerate-tree (car tree)) 
+                        (enumerate-tree (cdr tree))))))
+
+(define (accumulate-n op init seqs)
+    (if (null? (car seqs))
+        nil
+        (cons (accumulate op init (map car seqs))
+              (accumulate-n op init (map cdr seqs)))))
+
+(define (flatmap f seq)
+    (accumulate append nil (map f seq)))
