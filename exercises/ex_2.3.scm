@@ -26,6 +26,11 @@
     (- (x-point (topright r))
        (x-point (bottomleft r))))
 
+; represent 3: bottom and left segments, can be arbitrarily rotated
+(define (rectagle bs ls) (cons bs ls))
+(define (height r) (segment-len ls))
+(define (width r) (segment-len bs))
+
 ; application 
 (define (area r)
     (* (height r) (width r)))    
