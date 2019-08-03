@@ -19,4 +19,4 @@
         (lambda (x) ((a f) ((b f) x)))))
 
 (((+ one two) square) 3)
-(((+ two two) inc) 100)
+(((+ two two) dec) 100)
