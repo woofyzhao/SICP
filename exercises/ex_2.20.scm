@@ -19,5 +19,11 @@
               (else (go (cdr a)))))
     (go s))
 
+; better using filter
+(define (same-parity . s)
+    (filter (lambda (x)
+                (even? (+ x (car s))))
+            s))
+
 (same-parity 1 2 3 4 5 6 7)
 (same-parity 2 3 4 5 6 7)
