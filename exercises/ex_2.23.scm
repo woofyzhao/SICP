@@ -1,4 +1,4 @@
-; works but strange
+; works but bizarre
 (define (for-each f items)
     (if (null? items) 
         true
@@ -12,11 +12,11 @@
  ; The parameter is not used in the function body -- it is 'discarded'. 
  ; The initial iteration passes #t to this parameter, which has no effect. 
   
- (define (for-each procedure items) 
-    (define (iter items evaluate) 
+ (define (for-each f items) 
+    (define (iter items tmp) 
         (if (null? items) 
             true 
-            (iter (cdr items) (procedure (car items))))) 
+            (iter (cdr items) (f (car items))))) 
    (iter items true)) 
   
 
