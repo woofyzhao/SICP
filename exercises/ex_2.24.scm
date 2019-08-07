@@ -4,7 +4,7 @@
 ; ex_2.25
 (define s (list 1 3 (list 5 7) 9))
 s
-(cdr (car (cdr (cdr s))))
+(car (cdr (car (cdr (cdr s)))))
 
 (define s (list (list 7)))
 s
