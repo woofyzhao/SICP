@@ -9,7 +9,4 @@
     (accumulate cons seq2 seq1))
 
 (define (length seq)
-    (accumulate (lambda (x y)
-                    (if (null? x)
-                    y
-                    (+ y 1))) 0 seq))
+    (accumulate (lambda (x y) (+ y 1))) 0 seq)
