@@ -14,4 +14,4 @@
 ; I * A = A * I however for non identity matrix B
 ; B * A <> A * B
 ; but foldleft and foldright always produce the same result
-; so strict communicativity is not required
+; so strict communicativity is not required 
