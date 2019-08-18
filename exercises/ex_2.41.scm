@@ -51,6 +51,7 @@
 (unique-tuples 2 2)
 (unique-tuples 10 2)
 (unique-tuples 10 10)
+(unique-tuples 10 12)
 
 (define (triples-of-sum s n)
     (filter (lambda (seq) (= (accumulate + 0 seq) s))
@@ -63,10 +64,23 @@
 
 (define (triples-of-sum s n)
     (k-tuples-of-sum s n 3))
-    
+
 (triples-of-sum 20 30)
+
+; generalization using flatmap
+; more close to the exercise's style
+(define (unique-tuples n k)
+    (define (iter m k)
+        (if (= k 0)
+            (list nil)
+            (flatmap (lambda (j)
+                        (map (lambda (tuple) (cons j tuple))
+                            (iter (+ j 1) (- k 1))))
+                    (enumerate-interval m n))))
+    (iter 1 k))
+
+
+(unique-tuples 10 3)
 (triples-of-sum 100 100)
-
-
             
 
