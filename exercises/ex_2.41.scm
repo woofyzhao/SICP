@@ -36,24 +36,36 @@
 (define (triples-of-sum s n)
     (filter (lambda (seq) (= (accumulate + 0 seq) s))
             (unique-triples n)))
-(triples-of-sum 50 30)
+(triples-of-sum 100 100)
 
-; generalize to k-tuples of 1..n
+; generalize to k-tuples of 1..n, need thinking about the leaf cases
 (define (unique-tuples n k)
-    (if (or (< n k) (= k 0))
-        (list nil)
-        (filter (lambda (item) (not (null? item)))
-                (append (map (lambda (tuple) (cons n tuple))
-                            (unique-tuples (- n 1) (- k 1)))
-                        (unique-tuples (- n 1) k)))))
+    (cond ((< n k) nil)
+          ((= k 0) (list nil))
+          (else (append (unique-tuples (- n 1) k)
+                        (map (lambda (tuple) (cons n tuple))
+                             (unique-tuples (- n 1) (- k 1)))))))
 
-;(unique-tuples 20 3)
+(unique-tuples 1 0)
+(unique-tuples 1 1)
+(unique-tuples 2 2)
+(unique-tuples 10 2)
+(unique-tuples 10 10)
 
 (define (triples-of-sum s n)
     (filter (lambda (seq) (= (accumulate + 0 seq) s))
             (unique-tuples n 3)))
-(triples-of-sum 50 30)
 
+;futher abstraction
+(define (k-tuples-of-sum s n k)
+    (filter (lambda (seq) (= (accumulate + 0 seq) s))
+            (unique-tuples n k)))
+
+(define (triples-of-sum s n)
+    (k-tuples-of-sum s n 3))
+    
+(triples-of-sum 20 30)
+(triples-of-sum 100 100)
 
 
             
