@@ -22,4 +22,8 @@
 (define right-split (split beside below identity))
 (define up-split (split below beside identity))
 (define left-split (split beside below flip-horiz))
-(define up-split (split below beside flip-vert))
+(define down-split (split below beside flip-vert))
+
+; maybe this is better
+(define left-split (compose flip-horiz right-split))
+(define down-split (compose flip-vert down-split))

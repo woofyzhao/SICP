@@ -4,7 +4,7 @@
                (transform-painter painter2
                                   split-point
                                   (make-vect 1.0 0.5)
-                                  (make-vect 0.5 1.0)))
+                                  (make-vect 0.0 1.0)))
               (paint-down
                (transform-painter painter1
                                   (make-vect 0.0 0.0)

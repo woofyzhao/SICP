@@ -6,7 +6,7 @@
     (make-vect (+ (xcor-vect a) (xcor-vect b))
                (+ (ycor-vect a) (ycor-vect b))))
 
-(define (add-vect a b)
+(define (sub-vect a b)
     (make-vect (- (xcor-vect a) (xcor-vect b))
                (- (ycor-vect a) (ycor-vect b))))
 
