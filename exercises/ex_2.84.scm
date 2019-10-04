@@ -1,0 +1,22 @@
+(define (level-of type)
+    (cond ((eq? type 'complex) 10)
+          ((eq? type 'real) 9)
+          ((eq? type 'rational) 8)
+          ((eq? type 'integer 7))
+          (else (error "invalid type" type))))
+
+(define (apply-generic op . args)
+    (let ((type-tags (map type-tag args)))
+        (let ((proc (get op type-tags)))
+            (if proc
+                (apply proc (map contents args))
+                (if (= (length args) 2)
+                    (let ((type1 (car type-tags))
+                          (type2 (cadr type-tags))
+                          (a1 (car args))
+                          (a2 (cadr args)))
+                        (cond ((< (level-of type1) (level-of type2)) (apply-generic op (raise a1) a2))
+                              ((> (level-of type1) (level-of type2)) (apply-generic op a1 (raise a2)))
+                              (else (error "No method for these types " (list op type-tags)))))
+                    (error "No method for these types " (list op tppe-tags)))))))
+               
