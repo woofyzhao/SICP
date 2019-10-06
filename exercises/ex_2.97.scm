@@ -3,8 +3,8 @@
     ; a
     (define (reduce-terms n d)
         (let ((g (gcd-terms n d)))
-            (let ((nn (div-terms (integerized n g) g))
-                (dd (div-terms (integerized d g) g)))
+            (let ((nn (car (div-terms (integerized n g) g)))
+                  (dd (car (div-terms (integerized d g) g))))
                 (let ((common-factor (greatest-integer-divisor nn dd)))
                     (list (div-coeff nn common-factor) (div-coeff dd common-factor))))))
 
