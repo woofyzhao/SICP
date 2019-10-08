@@ -10,8 +10,9 @@
 ;ex_2.55
 (car ''19728364839)
 (car '''19728364839)
-'(xx yy '(a '(100) b))
-(eq? 100 '100)
+'''19728364839
+'(xx yy '(a '(100) b)) ; (xx yy (quote (a (quote (100)) b)))
+(eq? 100 '100) ; true
 
 ; everything is quotable
 '(define (equals? a b)
