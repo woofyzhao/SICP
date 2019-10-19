@@ -100,3 +100,6 @@
 (deriv '((x + 3) * (x + y + 2)) 'x)
 (deriv '((x + 3) * (x + y + 2) + x * 3 * (x + y + 2)) 'x)
 
+
+; http://community.schemewiki.org/?sicp-ex-2.58
+; sgm's solution is more general
