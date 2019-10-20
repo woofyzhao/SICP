@@ -1,6 +1,6 @@
 (load "bstree.scm")
 
-(define (list-tree elements)
+(define (list->tree elements)
     (car (partial-tree elements (length elements))))
 
 (define (partial-tree elts n)
@@ -19,7 +19,7 @@
                                    remaining-elts))))))))
 
 ; a
-(list-tree '(1 3 5 7 9 11)) 
+(list->tree '(1 3 5 7 9 11)) 
 ; '(5 (1 () (3 () ())) (9 (7 () ()) (11 () ())))
 
 ; b

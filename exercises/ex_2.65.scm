@@ -18,21 +18,21 @@
           (else (intersection-list set1 (cdr set2)))))
 
 (define (union-set set1 set2)
-    (list-tree (union-list (tree-list-2 set1)
-                           (tree-list-2 set2))))
+    (list->tree (union-list (tree->list-2 set1)
+                           (tree->list-2 set2))))
 
 (define (intersection-set set1 set2)
-    (list-tree (intersection-list (tree-list-2 set1)
-                                  (tree-list-2 set2))))
+    (list->tree (intersection-list (tree->list-2 set1)
+                                  (tree->list-2 set2))))
 
 (define set1 '(5 (3 (1 () ()) (4 () ())) (7 () ())))
 (define set2 '(6 (5 (4 () ()) ()) (8 (7 () ()) (9 () ()))))
 
-(tree-list-2 set1)
-(tree-list-2 set2)
+(tree->list-2 set1)
+(tree->list-2 set2)
 
 (union-set set1 set2)
 (intersection-set set1 set2)
 
-(tree-list-2 (union-set set1 set2))
-(tree-list-2 (intersection-set set1 set2))
+(tree->list-2 (union-set set1 set2))
+(tree->list-2 (intersection-set set1 set2))
