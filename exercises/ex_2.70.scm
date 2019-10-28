@@ -9,6 +9,8 @@ huffman-tree
 (define lyrics '(Get a job Sha na na na na na na na na Get a job Sha na na na na na na na na Wah yip yip yip yip yip yip yip yip yip Sha boom))
 (define encoded (encode lyrics huffman-tree))
 
+encoded 
+
 ; verify
 (decode encoded huffman-tree)
 

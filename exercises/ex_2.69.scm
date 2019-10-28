@@ -6,8 +6,7 @@
 (define (successive-merge set)
     (cond ((null? set) nil)
           ((= (length set) 1) (car set))
-          ((> (length set) 1) (successive-merge (adjoin-set
-                                                    (make-code-tree (car set)
-                                                                    (cadr set))
-                                                    (cddr set))))))
+          (else (successive-merge (adjoin-set
+                                    (make-code-tree (car set) (cadr set))
+                                    (cddr set))))))
 
