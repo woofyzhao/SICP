@@ -1,3 +1,7 @@
+; see solution from https://www.inchmeal.io/sicp/ch-2/ex-2.97.html
+
+
+; the original solution, incorrect
 (define (install-rational-package)
 
     ; a
@@ -29,5 +33,5 @@
     (put 'reduce '(scheme-number scheme-number) reduce-integers)
 
     (define (make-rat n d)
-        (let ((reduced (reduce n d)))
-            (cons (car reduced) (cadr reduced)))))
+        (reduce n d))
+

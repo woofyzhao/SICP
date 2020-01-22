@@ -14,16 +14,16 @@
             (error "polys not in same var -- GCD_POLY" (list p1 p2))))
     
     ; interface
-    (put 'gcd '(polynomial polynomial) gcd-poly))
+    (put 'gcd '(polynomial polynomial) (lambda (a b) (tag (gcd-poly a b)))))
 
-(define (install-scheme-integer-package)
+(define (install-scheme-number-package)
     ; internal
     (define (gcd a b)
         (if (= b 0)
             a
             (gcd b (remainder a b))))
     ; interface
-    (put 'gcd '(integer integer) gcd))
+    (put 'gcd '(scheme-number scheme-number) gcd))
 
 (define (greatest-common-divisors x y) (apply-generic 'gcd x y))
 
