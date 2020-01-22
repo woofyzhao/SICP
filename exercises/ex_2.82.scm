@@ -23,7 +23,7 @@
     (let ((proc (get op (type-tags args))))
         (if proc
             (apply proc (map contents args))
-            (iterate args)))
+            (iterate args))))
 
 ; Situation where this is not sufficiently general:
 ; types: A B C

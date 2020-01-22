@@ -3,15 +3,16 @@
 ; a
 ; some empty set if not exists
 (define (get-record record-file name)
-    ((get 'get-record (division record-file)) record-file name))
+    (attach-tag (division record-file)
+                ((get 'get-record (division record-file)) (contents record-file) name)))
 
 ; b
 (define (get-salary record)
-    ((get 'get-field (division record)) record 'salary))
+    ((get 'get-field (division record)) (contents record) 'salary))
 
 ; c
 (define (empty-record? record)
-    ((get 'empty-record? (division record)) record))
+    ((get 'empty-record? (division record)) (contents record)))
 
 (define (find-employee-record name record-file-list)
     (if (null? record-file-list)
