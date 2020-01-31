@@ -1,5 +1,7 @@
 ; see solution from https://www.inchmeal.io/sicp/ch-2/ex-2.97.html
-
+; still it is not complete correct in that:
+; 1. the calculated factor seems to be wrong
+; 2. it does not divid the greatest common divisor of all numerator and denominator coeffs
 
 ; the original solution, incorrect
 (define (install-rational-package)

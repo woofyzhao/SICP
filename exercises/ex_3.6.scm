@@ -1,0 +1,8 @@
+(define (rand)
+    (let ((next random-init))
+        (lambda (x)
+            (cond ((eq? x 'generate)
+                   (set! next (rand-update next))
+                   next)
+                  ((eq? x 'reset)
+                   (lambda (seed) (set! next seed)))))))
