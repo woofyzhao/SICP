@@ -1,0 +1,11 @@
+(define (ripple-carry-adder A B S c)
+    (if (null? A)
+        (begin (set-signal! c 0) c)
+        (begin (full-adder (car A) 
+                           (car B)
+                           (ripple-carry-adder (cdr A) (cdr B) (cdr S) (make-wire))
+                           (car S)
+                           c)
+                c)))
+
+; delay = n * (and-delay + or-delay) 

@@ -155,3 +155,17 @@
     (if (null? seq)
         0
         (+ 1 (length (cdr seq)))))
+
+; ===== chapter 3 =====
+(define (logical-not s)
+    (if (= s 1)
+        0
+        1))
+(define (logical-and a b)
+    (if (and (= a 1) (= b 1))
+        1
+        0))
+(define (logical-or a b)
+    (if (or (= a 1) (= b 1))
+        1
+        0))
