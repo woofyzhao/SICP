@@ -169,3 +169,34 @@
     (if (or (= a 1) (= b 1))
         1
         0))
+
+(define (stream-enumerate-interval a b)
+    (if (> a b)
+        the-empty-stream
+        (cons-stream a (stream-enumerate-interval (+ a 1) b))))
+
+(define (stream-ref stream n)
+    (if (= n 0)
+        (stream-car stream)
+        (stream-ref (stream-cdr stream) (- n 1))))
+
+(define (stream-for-each f stream)
+    (if (stream-null? stream)
+        'done
+        (begin
+            (f (stream-car stream))
+            (stream-for-each f (stream-cdr stream)))))
+(define (display-line x)
+    (newline)
+    (display x))
+(define (display-stream stream)
+    (stream-for-each display-line stream))
+
+
+(define (stream-filter f stream)
+    (cond ((stream-null? stream) the-empty-stream)
+          ((f (stream-car stream))
+           (cons-stream (stream-car stream)
+                        (stream-filter f (stream-cdr stream))))
+          (else (stream-filter f (stream-cdr stream)))))
+
