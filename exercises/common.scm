@@ -180,6 +180,10 @@
         (stream-car stream)
         (stream-ref (stream-cdr stream) (- n 1))))
 
+(define (to-slice stream from n)
+    (map (lambda (i) (stream-ref stream i))
+         (enumerate-interval from (- n 1))))
+
 (define (stream-for-each f stream)
     (if (stream-null? stream)
         'done
@@ -200,3 +204,57 @@
                         (stream-filter f (stream-cdr stream))))
           (else (stream-filter f (stream-cdr stream)))))
 
+(define (integers-starting-from n)
+    (cons-stream n (integers-starting-from (+ n 1))))
+
+(define (divisible? x y) (= (remainder x y) 0))
+
+(define ones (cons-stream 1 ones))
+
+(define (add-stream s1 s2) (stream-map + s1 s2))
+(define (mul-stream s1 s2) (stream-map * s1 s2))
+(define (div-stream s1 s2) (stream-map / s1 s2))
+
+(define integers (cons-stream 1 (add-stream ones integers)))
+
+(define fibs
+    (cons-stream 0
+        (cons-stream 1
+            (add-stream fibs
+                        (stream-cdr fibs)))))
+
+(define (scale-stream stream factor)
+    (stream-map (lambda (x) (* x factor)) stream))
+
+(define (negative s) (scale-stream s -1))
+
+(define double (cons-stream 1 (scale-stream double 2)))
+
+(define primes
+    (cons-stream 2
+                 (stream-filter prime? (integers-starting-from 3))))
+
+(define (prime? n)
+    (define (iter ps)
+        (cond ((> (square (stream-car ps) n)) true)
+              ((divisible? n (stream-car ps)) false)
+              (else (iter (stream-cdr ps)))))
+    (iter primes))
+
+(define (merge s1 s2)
+    (cond ((stream-null? s1) s2)
+          ((stream-null? s2) s1)
+          (else
+            (let ((s1car (stream-car s1))
+                  (s2car (stream-car s2)))
+                (cond ((< s1car s2car) 
+                       (cons-stream s1car (merge (stream-cdr s1) s2)))
+                      ((> s1car s2car)
+                       (cons-stream s2car (merge s1 (stream-cdr s2))))
+                      (else
+                        (cons-stream s1car 
+                                     (merge (stream-cdr s1) (stream-cdr s2)))))))))
+
+(define (partial-sums s)
+    (define sums (add-stream s (cons-stream 0 sums)))
+    sums)
