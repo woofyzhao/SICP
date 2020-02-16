@@ -10,5 +10,5 @@
 (define (rc-circuit R C dt)
     (define (run-circuit is v0)
         (add-stream (scale-stream is R)
-                    (integral (scale-stream is (/ 1.0 C) v0 dt))))
+                    (integral (scale-stream is (/ 1.0 C)) v0 dt)))
     run-circuit)
