@@ -1,0 +1,30 @@
+(define (cond? exp) (tagged-list? exp 'cond))
+(define (cond-clauses exp) (cdr exp))
+(define (cond-else-clause? clause) (eq? (cond-predicate clause) 'else))
+(define (cond-predicate clause) (car clause))
+(define (cond-actions clause) (cdr clause))
+
+(define (cond-apply-clause? clause) (eq? '=> (cadr clause)))
+(define (cond-func clause))
+
+(define (eval-cond exp)
+    (eval-cond-clauses (cond-clauses exp)))
+
+(define (eval-cond-clauses clauses env)
+    (if (null? clauses)
+        false
+        (let ((first (car clauses))
+              (rest (cdr clauses)))
+            (cond ((cond-else-clause? first)
+                   (if (null? rest)
+                       (eval (sequence->exp (cond-actions first)) env)
+                       (error "ELSE clause isn't last -- EVAL-COND-CLAUSES")))
+                  ((cond-apply-clause? first)
+                   (let ((test-result (eval (cond-predicate first) env)))
+                        (if (true? test-result)
+                            (apply (eval (cond-func first) env) (list test-result))
+                            (eval-cond-clauses rest env))))
+                  (else
+                    (if (true? (eval (cond-predicate first) env))
+                        (eval (sequence->exp (cond-actions first)) env)
+                        (eval-cond-clauses rest env)))))))

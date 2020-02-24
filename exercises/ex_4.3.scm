@@ -1,0 +1,12 @@
+(define (eval-compound exp env) (apply-generic 'eval exp env))
+(define (eval exp env)
+    (cond ((self-evaluating? exp) exp)
+          ((variable? exp) (lookup-variable-value exp env))
+          (else (eval-compound exp env))))
+
+(define (install-if)
+    (define (eval exp env)
+        (if (true? (eval (if-predicate exp) env))
+            (eval (if-consequent exp) env)
+            (eval (if-alternative exp) env)))
+    (put 'eval 'if eval))
