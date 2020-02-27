@@ -1,6 +1,2 @@
-(define x 100)
-((lambda ()
-    (define x 888)
-	(set! x 999)
-	(display x)))
-(display x)
+(load "evaluator.scm")
+(driver-loop)

@@ -1,3 +1,5 @@
+(define apply-in-underlying-scheme apply)
+
 ; eval, apply
 (define (eval exp env)
     (cond ((self-evaluating? exp) exp)
@@ -44,7 +46,7 @@
         (eval (if-alternative exp) env)))
 
 (define (eval-sequence exps env)
-    (cond ((last-exps? exps) (eval (first-exp exps) env))
+    (cond ((last-exp? exps) (eval (first-exp exps) env))
           (else (eval (first-exp exps) env)
                 (eval-sequence (rest-exps exps) env))))
 
@@ -102,12 +104,12 @@
 (define (if-consequent exp) (caddr exp))
 (define (if-alternative exp)
     (if (not (null? (cdddr exp)))
-        (adddr exp)
+        (cadddr exp)
         'false))
 (define (make-if predicate consequent alternative)
     (list 'if predicate consequent alternative))
 
-(define (begin? exp) (tagged-list exp 'begin))
+(define (begin? exp) (tagged-list? exp 'begin))
 (define (begin-actions exp) (cdr exp))
 (define (last-exp? seq) (null? (cdr seq)))
 (define (first-exp seq) (car seq))
@@ -123,7 +125,7 @@
 (define (operands exp) (cdr exp))
 (define (no-operands? ops) (null? ops))
 (define (first-operand ops) (car ops))
-(define (rest-operand ops) (cdr ops))
+(define (rest-operands ops) (cdr ops))
 
 (define (cond? exp) (tagged-list? exp 'cond))
 (define (cond-clauses exp) (cdr exp))
@@ -183,7 +185,7 @@
                   (else (scan (cdr vars) (cdr vals)))))
         (if (eq? env the-empty-environment)
             (error "Unbound variable" var)
-            (let ((frame (first-frame)))
+            (let ((frame (first-frame env)))
                 (scan (frame-variables frame)
                       (frame-values frame)))))
     (env-loop env))
@@ -196,7 +198,7 @@
                   (else (scan (cdr vars) (cdr vals)))))
         (if (eq? env the-empty-environment)
             (error "Unbound variable" var)
-            (let ((frame (first-frame)))
+            (let ((frame (first-frame env)))
                 (scan (frame-variables frame)
                       (frame-values frame)))))
     (env-loop env))
@@ -205,7 +207,73 @@
     (let ((frame (first-frame env)))
         (define (scan vars vals)
             (cond ((null? vars) (add-binding-to-frame! var val frame))
-                  ((eq? var (car vars) (set-car! vals val)))
+                  ((eq? var (car vars)) (set-car! vals val))
                   (else (scan (cdr vars) (cdr vals)))))
         (scan (frame-variables frame)
               (frame-values frame))))
+
+; primitive procedures and global environment
+(define (setup-environment)
+    (let ((initial-env
+            (extend-environment (primitive-procedure-names)
+                                (primitive-procedure-objects)
+                                the-empty-environment)))
+        (define-variable! 'true true initial-env)
+        (define-variable! 'false false initial-env)
+        initial-env))
+
+(define primitive-procedures
+    (list (list 'car car)
+          (list 'cdr cdr)
+          (list 'cons cons)
+          (list 'null? null?)
+          (list '+ +)
+          (list '- -)
+          (list '* *)
+          (list '/ /)
+          (list 'list list)
+          (list 'quotient quotient)
+          (list 'remainder remainder)
+          (list 'set-car! set-car!)
+          (list 'set-cdr! set-cdr!)
+          ;no can do, ex_4.14
+          ;(list 'map map)
+
+          ;more primitives
+          ))
+          
+(define (primitive-procedure-names) (map car primitive-procedures))
+(define (primitive-procedure-objects)
+    (map (lambda (proc) (list 'primitive (cadr proc)))
+         primitive-procedures))
+
+(define (primitive-procedure? proc) (tagged-list? proc 'primitive))
+(define (primitive-implementation proc) (cadr proc))
+
+(define (apply-primitive-procedure proc args)
+    (apply-in-underlying-scheme
+        (primitive-implementation proc) args))
+
+;REPL
+(define input-prompt ";;; M-Eval input:")
+(define output-prompt ";;; M-Eval value:")
+(define (prompt-for-input string)
+    (newline) (newline) (display string) (newline))
+(define (announce-output string)
+    (newline) (display string) (newline))
+(define (user-print object)
+    (if (compound-procedure? object)
+        (display (list 'compound-procedure
+                       (procedure-parameters object)
+                       (procedure-body object)
+                       '<procedure-env>))
+        (display object)))
+(define (driver-loop)
+    (prompt-for-input input-prompt)
+    (let ((input (read)))
+        (let ((output (eval input the-global-environment)))
+            (announce-output output-prompt)
+            (user-print output)))
+    (driver-loop))
+
+(define the-global-environment (setup-environment))
