@@ -127,6 +127,7 @@
 (define (no-operands? ops) (null? ops))
 (define (first-operand ops) (car ops))
 (define (rest-operands ops) (cdr ops))
+(define (make-application operator operands) (cons operator operands))
 
 (define (cond? exp) (tagged-list? exp 'cond))
 (define (cond-clauses exp) (cdr exp))
@@ -153,9 +154,8 @@
 (define (let-parameters exp) (map car (let-bindings exp)))
 (define (let-arguments exp) (map cadr (let-bindings exp)))
 (define (let->combination exp)
-    (cons (make-lambda (let-parameters exp)
-                       (let-body exp))
-          (let-arguments exp)))
+    (make-application (make-lambda (let-parameters exp) (let-body exp))
+                      (let-arguments exp)))
 
 ; evaluator data structures
 
