@@ -79,7 +79,7 @@
         (eq? (car exp) tag)
         false))
 
-(define (assigment? exp)
+(define (assignment? exp)
     (tagged-list? exp 'set!))
 (define (assignment-variable exp) (cadr exp))
 (define (assignment-value exp) (caddr exp))
@@ -245,6 +245,7 @@
           (list '= =)
           (list '< <)
           (list '> >)
+          (list 'not not)
           (list 'list list)
           (list 'quotient quotient)
           (list 'remainder remainder)
