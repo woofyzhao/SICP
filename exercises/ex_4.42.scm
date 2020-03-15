@@ -1,0 +1,30 @@
+(define stmts
+    '(((kitty 2) (betty 3))
+      ((ethel 1) (joan 2))
+      ((joan 3) (ethel 5))
+      ((kitty 2) (betty 1))
+      ((mary 4) (betty 1))))
+
+(define (no-conflict kv set)
+    (define (iter next)
+        (if (null? next)
+            true
+            (let ((k (caar next))
+                  (v (cadar next)))
+                (if (= (car kv) k)
+                    (and (= v (cadr kv)) (iter (cdr next)))
+                    (iter (cdr next))))))
+    (iter set))
+
+(define (choose girl-says)
+    (define (iter rest-girl-says selected)
+        (if (null? rest-girl-says)
+            (display selected)
+            (let ((s1 (caar rest-girl-says))
+                  (s2 (cadar rest-girl-says)))
+                (let ((which (amb s1 s2)))
+                    (require (no-conflict which selected))
+                    (iter (cdr rest-girl-says) (cons which selected))))))
+    (iter girl-says '()))
+
+(choose stmts)
