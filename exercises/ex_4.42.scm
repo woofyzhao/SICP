@@ -7,8 +7,7 @@
 
 (define (no-conflict kv set)
     (define (iter next)
-        (if (null? next)
-            true
+        (or (null? next)
             (let ((k (caar next))
                   (v (cadar next)))
                 (if (= (car kv) k)

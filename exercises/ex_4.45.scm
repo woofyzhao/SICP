@@ -1,0 +1,5 @@
+1. [the professor] (lectures to the student in the class with the cat)
+2. [the professor] (lectures to [the student in the class] with the cat)
+3. [the professor] (lectures to [the student in the class with the cat])
+4. [the professor] (lectures to [the student in [the class with the cat]])
+5. [the professor] (lectures to [the student] in [the class with the cat])
