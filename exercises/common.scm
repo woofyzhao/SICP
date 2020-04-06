@@ -258,3 +258,16 @@
 (define (partial-sums s)
     (define sums (add-stream s (cons-stream 0 sums)))
     sums)
+
+(define (list-ref s n)
+    (if (= n 0)
+        (car s)
+        (list-ref (cdr s) (- n 1))))
+
+(define (list-starting-from s n)
+    (if (= n 0)
+        s
+        (list-starting-from (cdr s) (- n 1))))
+
+(define (random-select s)
+    (list-ref s (random (length s))))
