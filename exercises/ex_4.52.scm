@@ -34,6 +34,3 @@
                                (lambda (val2 fail3)
                                     (succeed val2 fail3))
                                fail))))))
-
-
-; if using ordinary set, count will always be 1
