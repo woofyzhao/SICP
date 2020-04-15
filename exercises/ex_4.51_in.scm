@@ -1,6 +1,6 @@
 (define count 0)
 
-(define (require p) (if (not p) (amb)))
+(define (require p) (if (not p) (amb) 'ok))
 
 (define (an-element-of s)
     (require (not (null? s)))
