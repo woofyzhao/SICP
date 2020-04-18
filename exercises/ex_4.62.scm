@@ -5,4 +5,4 @@
 ; (last-pair (3) (3))
 ; (last-pair (1 2 3) (3))
 ; (last-pair (2 3) (3))
-; won't work for (last-pair ?x (3))
+; won't work for (last-pair ?x (3)), probably only emits (last-pair (3) (3))
