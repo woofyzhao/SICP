@@ -1,7 +1,7 @@
 (rule (?x next-to ?y in (?x ?y . ?u)))
 
 (rule (?x next-to ?y in (?v . ?z))
-    (?x netx-to ?y in ?z))
+    (?x next-to ?y in ?z))
 
 (?x next-to ?y in (1 (2 3) 4))
 ; 1 next-to (2 3)
