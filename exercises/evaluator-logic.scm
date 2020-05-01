@@ -35,7 +35,7 @@
                                      (lambda (v f)
                                         (contract-question-mark v))))
                     (qeval q (singleton-stream '()))))
-                (query-driver-loop)))))
+               (query-driver-loop)))))
 
 (define (instantiate exp frame unbound-var-handler)
     (define (copy exp)
