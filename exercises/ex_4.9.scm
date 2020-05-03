@@ -13,10 +13,8 @@
 
 (define (make-procedure-definition name parameters body)
     (cons 'define  (cons (cons name parameters) body)))
-(define (make-procedure-application procedure-name arguments)
-    (cons procedure-name arguments))
-(define (make-lambda-application lambda arguments)
-    (cons lambda arguments))
+(define (make-procedure-application procedure arguments)
+    (cons procedure arguments))
 
 ; wrap the procedure definition in a lambda to contrain its scope
 (define (while->application exp)
@@ -31,7 +29,7 @@
                     (append (while-body exp)
                             (make-procedure-application procedure-name '()))))))
 
-    (make-lambda-application
+    (make-procedure-application
         (make-lambda 
             '()
             (list (while->procedure-def 'while-procedure)
