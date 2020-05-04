@@ -4,7 +4,7 @@
     (set! count (+ count 1))
     x)
 
-(define (id (id 10)))
+(define w (id (id 10)))
 
 count ; 1
 

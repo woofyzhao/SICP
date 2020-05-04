@@ -6,5 +6,5 @@
         'halted))
 
 (try try)
-; if (try try) halts, which means (halts? try try) evaluates to true, then it should run forever
-; if (try try) doesn't halt, which means (halts try try) evaluates to false, then it should halt
+; if (try try) halts, which means (halts? try try) evaluates to false, then it should run forever
+; if (try try) doesn't halt, which means (halts? try try) evaluates to true, then it should halt

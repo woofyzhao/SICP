@@ -273,6 +273,12 @@
                                 the-empty-environment)))
         (define-variable! 'true true initial-env)
         (define-variable! 'false false initial-env)
+
+        ; pre-defined cons/car/cdr
+	    (actual-value '(define (cons x y) (lambda (m) (m x y))) initial-env)
+	    (actual-value '(define (car z) (z (lambda (p q) p))) initial-env)
+	    (actual-value '(define (cdr z) (z (lambda (p q) q))) initial-env)
+
         initial-env))
 
 (define primitive-procedures

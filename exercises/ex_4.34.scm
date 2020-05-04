@@ -327,6 +327,9 @@
           ((and (pair? object) (eq? 'lazy-list (car object)))
            (begin (display "(")
                   (user-print 
+                    ; to extract the first argument in (cons x y)
+                    ; another more straight forward way using lookup-variable in environment
+                    ; see: http://community.schemewiki.org/?sicp-ex-4.34
                     (force-it (apply (cdr object) 
                                      (list '(lambda (p q) p)) 
                                      the-global-environment)))

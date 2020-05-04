@@ -46,6 +46,7 @@
 
 ; c 
 ; make-procedure is better because we can easily explore other transformations
+; along with the fact of repeated calculation everytime when procedure-body is accessed
 
 (define (make-procedure parameters body env)
     (list 'procedure parameters (scan-out-defines body) env))

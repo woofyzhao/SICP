@@ -20,7 +20,8 @@ Cy's version:
     (p1 1) ; (1 2)
     (p2 1) ; (1 2)
 
-c. 
-Cy's arguments does make some sense.
+c. anywhere eval is used can be replaced by actual-value
+
+d. Cy's arguments does make some sense.
 But the orignal version is not wrong in the normal order semantic itself.
 We can choose not to do this type of programming and stick to the non-strict rule in mind.
