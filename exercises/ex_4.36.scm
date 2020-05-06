@@ -7,4 +7,11 @@
 (define (a-pythagorean-triple)
     (let ((k (an-integer-starting-from 1)))
         (a-pythagorean-triple-end-with k)))
-    
+
+; no need to split up:
+(define (a-pythagorean-triple)
+    (let ((k (an-integer-starting-from 1)))
+        (let ((i (an-integer-between 1 k)))
+            (let ((j (an-integer-between i k)))
+                (require (= (+ (* i i) (* j j)) (* k k)))
+                (list i j k)))))

@@ -45,8 +45,6 @@
           (aproc (analyze (if-fail-alt exp))))
         (lambda (env succeed fail)
             (cproc env
-                   (lambda (val fail2) (succeed val fail2))
-                   (lambda () 
-                    (aproc env
-                           (lambda (val2 fail3) (succeed val2 fail3))
-                           fail))))))
+                   succeed
+                   (lambda ()
+                        (aproc env succeed fail))))))

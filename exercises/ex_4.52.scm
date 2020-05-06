@@ -34,3 +34,14 @@
                                (lambda (val2 fail3)
                                     (succeed val2 fail3))
                                fail))))))
+
+====== the above is correct, but the more concise way is:
+
+(define (analyze-if-fail exp)
+    (let ((cproc (analyze (if-fail-cond exp)))
+          (aproc (analyze (if-fail-alt exp))))
+        (lambda (env succeed fail)
+            (cproc env
+                   succeed
+                   (lambda ()
+                        (aproc env succeed fail))))))
