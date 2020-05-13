@@ -282,7 +282,6 @@
 
 (define (store-rule-in-index rule)
     (let ((pattern (conclusion rule)))
-        (newline)
         (if (indexable? pattern)
             (let ((key (index-key-of pattern)))
                 (let ((current-rule-stream 

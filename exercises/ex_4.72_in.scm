@@ -21,3 +21,14 @@ as an example, to generate all the love and hates:
 (assert! (rule (hates ?x ?y) (and (hates ?x ?m) (hates ?m ?y))))
 
 (or (loves ?x ?y) (hates ?a ?b))
+
+
+=========
+A more straight forward example:
+
+(assert! (rule (ones (1 . ?x)) (ones ?x)))
+(assert! (rule (twos (2 . ?x)) (twos ?x)))
+(assert! (rule (ones (1))))
+(assert! (rule (twos (1))))
+
+(or (ones ?x) (twos ?y))

@@ -131,6 +131,8 @@
                (end-with-gs ?rel))))
 
 ; reverse
+(load "evaluator-logic.scm")
+(query-driver-loop)
 (assert! (rule (append-to-form () ?y ?y)))
 (assert! (rule (append-to-form (?u . ?v) ?y (?u . ?z))
             (append-to-form ?v ?y ?z)))
