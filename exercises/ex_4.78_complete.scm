@@ -153,6 +153,11 @@
             frame
             (amb))))
 
+; *** or use a special form require-fail dedicated for this senario:
+(define (negate operands frame)
+    (require-fail (qeval (negated-query operands) frame))
+    frame)
+
 (put 'not 'qeval negate)
 
 ; *** using require

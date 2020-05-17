@@ -31,6 +31,17 @@
                         (succeed 'ok fail2))
                     fail))))
 
+; special form to ensure failure
+(define (require-fail? exp) (tagged-list? exp 'require-fail))
+(define (require-fail-exp exp) (cadr exp))
+
+(define (analyze-require-fail exp)
+    (let ((proc (analyze (require-fail-exp exp))))
+        (lambda (env succeed fail)
+            (proc env
+                  (lambda (value fail2) (fail))
+                  (lambda () (succeed 'ok fail))))))
+
 (define (analyze exp)
     (cond ((self-evaluating? exp) (analyze-self-evaluating exp))
           ((variable? exp) (analyze-variable exp))
@@ -39,6 +50,7 @@
           ((assignment? exp) (analyze-assignment exp))
           ((perm-assignment? exp) (analyze-perm-assignment exp))
           ((if-fail? exp) (analyze-if-fail exp))
+          ((require-fail? exp) (analyze-require-fail exp))
           ((definition? exp) (analyze-definition exp))
           ((let? exp) (analyze (let->combination exp)))
           ((if? exp) (analyze-if exp))
