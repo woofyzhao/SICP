@@ -2,7 +2,7 @@
 ;;; That is, we first define our logic evaluator in the Amb driver loop
 ;;; Then we start our logic driver loop
 ;;; Then we define assertions and rules and evaluate patterns
-;;; So in the end there are two driver loops at play, 
+;;; So in the end there are two driver loops at play during runtime,
 ;;; with the logic driver loop being nested in the Amb driver loop!
 
 ;;; REPL: Read-Eval-Print Loop (Driver Loop)
