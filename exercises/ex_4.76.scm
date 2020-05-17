@@ -42,7 +42,9 @@
                         (qeval conjunct frame-stream))
                     conjuncts)))
 
-; fold while pass result streams along
+; fold while pass result streams along. 
+; Wrong! Not only this is no different from the orginal one in complexity
+; but also the merge is really not necessary!
 (define (conjoin conjuncts frame-stream)
     (if (empty-conjunction? conjuncts)
         frame-stream

@@ -1,6 +1,7 @@
 (load "common.scm")
 
 (define apply-in-underlying-scheme apply)
+(define eval-in-underlying-scheme eval)
 
 ; eval, apply
 
@@ -361,14 +362,19 @@
                                 the-empty-environment)))
         (define-variable! 'true true initial-env)
         (define-variable! 'false false initial-env)
+        (define-variable! 'user-initial-environment user-initial-environment initial-env)
         initial-env))
 
 (define primitive-procedures
     (list (list 'car car)
           (list 'cdr cdr)
+          (list 'pair? pair?)
+          (list 'symbol? symbol?)
+          (list 'number? number?)
           (list 'cons cons)
           (list 'null? null?)
           (list 'eq? eq?)
+          (list 'equal? equal?)
           (list 'even? even?)
           (list 'odd? odd?)
           (list '+ +)
@@ -388,7 +394,27 @@
           (list 'memq memq)
           (list 'random random)
           (list 'square square)
-          ;no can do, ex_4.14
+          (list 'caar caar)
+          (list 'cadr cadr)
+          (list 'caddr caddr)
+          (list 'cadddr cadddr)
+          (list 'cddr cddr)
+          (list 'cdddr cdddr)
+          (list 'cdar cdar)
+          (list 'newline newline)
+          (list 'display display)
+          (list 'read read)
+          (list 'apply apply-in-underlying-scheme)
+          (list 'eval eval-in-underlying-scheme)
+          (list 'string=? string=?)
+          (list 'string->symbol string->symbol)
+          (list 'symbol->string symbol->string)
+          (list 'substring substring)
+          (list 'string-append string-append)
+          (list 'string-length string-length)
+          (list 'error error)
+          (list 'append append)
+          ;incorrect, from ex_4.14
           ;(list 'map map)
 
           ;more primitives

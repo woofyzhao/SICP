@@ -71,3 +71,11 @@
 
 ; (and (supervisor ?x ?y) (not (job ?x (computer programmer))))
 ; (and (not (job ?x (computer programmer))) (supervisor ?x ?y))
+
+
+==========
+Note: the time to apply the filter above is wrong and doesn't make sense.
+In order to perform the filter (promise) as soon as possible, we can do it in 
+the extend function once all variables are bound.
+
+See an implementation from https://www.inchmeal.io/sicp/ch-4/ex-4.77.html

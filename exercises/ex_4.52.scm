@@ -35,7 +35,7 @@
                                     (succeed val2 fail3))
                                fail))))))
 
-====== the above is correct, but the more concise way is:
+;====== the above is correct, but the more concise way is:
 
 (define (analyze-if-fail exp)
     (let ((cproc (analyze (if-fail-cond exp)))
