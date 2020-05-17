@@ -153,7 +153,7 @@
             frame
             (amb))))
 
-; *** or use a special form require-fail dedicated for this senario:
+; *** or we can use a special form require-fail dedicated for negation:
 (define (negate operands frame)
     (require-fail (qeval (negated-query operands) frame))
     frame)
