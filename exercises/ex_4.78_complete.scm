@@ -147,7 +147,7 @@
             (begin
                 (qeval (negated-query operands) frame)
                 (permanent-set! result 'success) ; at least one match found if we reach here
-                (amb))  ; exhaust the alternatives in case of success matches
+                (amb))  ; exhaust the alternatives of success matches
             (if (eq? result 'failed)
                 frame
                 (amb)))))
