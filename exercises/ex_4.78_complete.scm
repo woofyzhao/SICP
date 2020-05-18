@@ -70,7 +70,7 @@
 
 ; 3. Define the logic evaluator itself (Type in Amb REPL)
 
-; The modified places of the stream approach are marked with *** below
+; The modified places compared with the stream approach are marked with *** below
 
 ; 3.1 Define the driver loop
 (define input-prompt ";;; Logic-Query input:")
@@ -146,14 +146,14 @@
         (if-fail 
             (begin
                 (qeval (negated-query operands) frame)
-                (permanent-set! result 'success)
+                (permanent-set! result 'success) ; at least one match found if we reach here
                 (amb))  ; exhaust the alternatives in case of success matches
-            'ok)
-        (if (eq? result 'failed)
-            frame
-            (amb))))
+            (if (eq? result 'failed)
+                frame
+                (amb)))))
 
-; *** or we can use a special form require-fail dedicated for negation:
+; *** or we prefer to use a special form require-fail dedicated for negation
+; *** because it's much cleaner and more efficient:
 (define (negate operands frame)
     (require-fail (qeval (negated-query operands) frame))
     frame)
@@ -173,10 +173,11 @@
 
 (put 'lisp-value 'qeval lisp-value)
 
-; *** Install apply, eval and user-initial-environment in the amb evaluator
+; *** Have to install apply, eval and user-initial-environment in the amb evaluator.
 ; At the end of the day, we should be dealing something like:
 ; (apply apply (list (eval '> user-initial-environment) (list 2 1)))
-; for (lisp-value > 2 1) in the logic language
+; in the underlying scheme for (lisp-value > 2 1) in the logic language.
+; That is the apply made its way through 3 layers: apply (logic) -> apply (amb) -> apply (scheme)
 (define (execute exp)
     (apply (eval (predicate exp) user-initial-environment)
            (args exp)))
@@ -218,7 +219,7 @@
     (let ((rule (an-element-of (fetch-rules pattern frame))))
         (apply-a-rule rule pattern frame)))
 
-; *** no need to filter 'failed tags
+; *** no need to filter 'failed tags now
 (define (apply-a-rule rule query-pattern query-frame)
     (let ((clean-rule (rename-variables-in rule)))
         (let ((unify-result
